@@ -1,0 +1,90 @@
+state("SCP - Containment Breach", "v1.3.11")
+{
+	byte mainmenu : "SCP - Containment Breach.exe", 0x000F5400, 0x120, 0x458;
+	byte onaloadingscreen : "SCP - Containment Breach.exe", 0x000F5400, 0x98, 0x598;
+	byte a2event : "SCP - Containment Breach.exe", 0x000F5400, 0x98, 0x1490;
+	byte gateBloadigscreen : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0xd68;
+	byte gateBloadigscreen2 : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0xd64;
+	byte paused : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0x5dc;
+	byte keypresses : "SCP - Containment Breach.exe", 0x000f5f70, 0x604;
+	float blink : "SCP - Containment Breach.exe", 0x000F5400, 0x498, 0x7CC;
+	float sprint : "SCP - Containment Breach.exe", 0x000F5400, 0x680, 0x77C;
+	float xaxis : "SCP - Containment Breach.exe", 0x000F5400, 0x160, 0x140, 0x40;
+	float yaxis : "SCP - Containment Breach.exe", 0x000F5400, 0x160, 0x140, 0x44;
+	float zaxis : "SCP - Containment Breach.exe", 0x000F5400, 0x160, 0x140, 0x48;
+	float deathTimer : "SCP - Containment Breach.exe", 0x000F5400, 0x98, 0x358;
+	float scp106state : "SCP - Containment Breach.exe", 0x000F5400, 0xBC, 0x8, 0x88, 0x8, 0xEc, 0x8, 0x178;
+}
+
+startup
+{
+settings.Add("1.3.11", true, "1.3.11");
+settings.SetToolTip("1.3.11", "It will automatically split when you:\n - Spawn\n - Beat the game\nCurrently supports the following versions:\n - 1.3.11");
+
+settings.Add("notb2", false, "A1, B1, B2", "1.3.11");
+settings.SetToolTip("notb2", "Select this if you are going for any ending that's not B2.");
+
+settings.Add("b2", false, "B2", "1.3.11");
+settings.SetToolTip("b2", "Select this only if you are going for B2 ending.");
+
+}
+
+init
+{
+    if (modules.First().ModuleMemorySize == 6537216)
+        version = "v1.3.11";
+	int split;
+	vars.split = 0;
+}
+
+start
+{
+	if (settings["1.3.11"] == true && (current.onaloadingscreen != 0 | current.onaloadingscreen == 0))
+		if (old.blink < -9.99999999 && (current.blink > 1 || current.blink <= -10.00000001) && current.zaxis > 130) {
+			vars.split = 1;
+			return true;
+		}
+
+}
+
+split
+{
+	if (settings["1.3.11"] == true)
+	{
+        if (settings["notb2"] == true && settings["b2"] == false)
+            if ((current.sprint == -5 && current.scp106state != -11) || (current.a2event == 1) || (current.yaxis < 42.0781 && current.yaxis > 42 && current.deathTimer == 0))
+            {
+                vars.split++;
+                return true;
+            }
+        else if (settings["notb2"] == false && settings["b2"] == true)
+            if (current.deathTimer != 0.0 && current.yaxis < 42.0781)
+            {
+                vars.split++;
+                return true;
+            }
+	}
+}
+
+isLoading
+{
+	if (settings["1.3.11"] == true)
+	{
+		if ((current.onaloadingscreen == 1 && current.keypresses == 0) || (current.yaxis > 501.25) || (current.yaxis > 42 && current.gateBloadigscreen == 2 && current.paused == 0 && current.gateBloadigscreen2 == 2))
+			return true;
+		else
+			return false;
+	}
+}
+
+reset
+{
+	if (settings["1.3.11"] == true)
+	{
+		if(current.mainmenu == 0)
+		{
+			vars.split = 0;
+			return true;
+		}
+	}
+}
