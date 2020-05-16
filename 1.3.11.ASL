@@ -7,6 +7,7 @@ state("SCP - Containment Breach", "v1.3.11")
 	byte gateBloadigscreen2 : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0xd64;
 	byte paused : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0x5dc;
 	byte keypresses : "SCP - Containment Breach.exe", 0x000f5f70, 0x604;
+	byte inventory : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0x5E4;
 	float blink : "SCP - Containment Breach.exe", 0x000F5400, 0x498, 0x7CC;
 	float sprint : "SCP - Containment Breach.exe", 0x000F5400, 0x680, 0x77C;
 	float xaxis : "SCP - Containment Breach.exe", 0x000F5400, 0x160, 0x140, 0x40;
@@ -175,7 +176,7 @@ isLoading
 {
 	if (settings["1.3.11"] == true)
 	{
-		if ((current.onaloadingscreen == 1 && current.keypresses == 0) || (current.yaxis > 501.25) || (current.yaxis > 42 && current.gateBloadigscreen == 2 && current.paused == 0 && current.gateBloadigscreen2 == 2))
+		if ((current.onaloadingscreen == 1 && current.keypresses == 0) || (current.yaxis > 501.25) || (current.yaxis > 42 && current.gateBloadigscreen == 2 && current.paused == 0 && current.gateBloadigscreen2 == 2 && current.inventory == 0))
 			return true;
 		else
 			return false;
