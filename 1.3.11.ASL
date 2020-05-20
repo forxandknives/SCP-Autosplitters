@@ -26,7 +26,7 @@ settings.Add("maincategory", false, "Any%", "1.3.11");
 settings.SetToolTip("maincategory", "Select this if you are running Any% with or without OoB.");
 
 settings.Add("randomending", false, "Random%", "1.3.11");
-settings.SetToolTip("randomending", "Select this if you are running Random%.\nDoes not include B2 because I can't find a pointer to the warheads.");
+settings.SetToolTip("randomending", "Select this if you are running Random%.\nGate B ending 2 ends where the B1 ending would. You need to add 1:22:12 to your final time.");
 
 settings.Add("gatea1ending", false, "Gate A Ending 1", "maincategory");
 settings.SetToolTip("gatea1ending", "It will automatically split when you:\n - Reach Gate A\n - Trigger the Chaos Insurgency event.");

@@ -22,11 +22,8 @@ startup
 settings.Add("1.3.11", true, "1.3.11");
 settings.SetToolTip("1.3.11", "It will automatically split when you:\n - Spawn\n - Beat the game\nCurrently supports the following versions:\n - 1.3.11");
 
-settings.Add("notb2", false, "A1, B1, B2", "1.3.11");
-settings.SetToolTip("notb2", "Select this if you are going for any ending that's not B2.");
-
-settings.Add("b2", false, "B2", "1.3.11");
-settings.SetToolTip("b2", "Select this only if you are going for B2 ending.");
+settings.Add("notb2", true, "All Endings", "1.3.11");
+settings.SetToolTip("notb2", "Select this if you are going for any ending.\nIf you are going for B2, time ends when the B1 run would end, but you need to add 1:22.12 to your final time.");
 
 }
 
