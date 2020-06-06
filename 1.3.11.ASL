@@ -68,12 +68,12 @@ split
 	{
 		if (settings["maincategory"] == true)
 		{
-			if (vars.split == 1 && current.zaxis < 95)
+			if (vars.split == 1 && current.zaxis < 95 && current.zaxis > 94)
 			{
 				vars.split = 2;
 				return true;
 			}
-			else if (vars.split == 2 && current.zaxis < 48)
+			else if (vars.split == 2 && current.zaxis < 48 && current.zaxis > 47)
 			{
 				vars.split = 3;
 				return true;
@@ -145,19 +145,19 @@ split
 		}
 		else if (settings["randomending"] == true)
 		{
-			if (vars.split == 1 && current.zaxis < 95) //lcz to hc split
+			if (vars.split == 1 && current.zaxis < 95 && current.zaxis > 94) //lcz to hc split
 			{
 				vars.split = 2;
 				return true;
 			}
-			else if (vars.split == 2 && current.zaxis < 48) //hc to ez
+			else if (vars.split == 2 && current.zaxis < 48 && current.zaxis > 47) //hc to ez
 			{
 				vars.split = 3;
 				return true;
 			}
 			if (vars.split == 3)
 			{
-				if ((current.xaxis > 141 && current.xaxis < 145 && current.zaxis < 9 && current.zaxis > 6 && current.yaxis > 500) /*ez to gate a*/ || (current.yaxis > 42 && current.yaxis < 43) /*ez to gate b*/)
+				if ((current.xaxis > 141 && current.xaxis < 145 && current.zaxis < 9 && current.zaxis > 6 && current.yaxis > 500) || (current.yaxis > 42 && current.yaxis < 43))
 				{
 					vars.split = 4;
 					return true;
