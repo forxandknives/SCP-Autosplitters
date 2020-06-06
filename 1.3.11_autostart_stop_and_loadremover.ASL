@@ -23,7 +23,7 @@ settings.Add("1.3.11", true, "1.3.11");
 settings.SetToolTip("1.3.11", "It will automatically split when you:\n - Spawn\n - Beat the game\nCurrently supports the following versions:\n - 1.3.11");
 
 settings.Add("allEndings", false, "All Endings", "1.3.11");
-settings.SetToolTip("notb2", "Select this if you are going for any ending.\nIf you are going for B2, time ends when the B1 run would end, but you need to add 1:22.12 to your final time.");
+settings.SetToolTip("allEndings", "Select this if you are going for any ending.\nIf you are going for B2, time ends when the B1 run would end, but you need to add 1:22.12 to your final time.");
 
 settings.Add("death%", false, "Death%", "1.3.11");
 settings.SetToolTip("death%", "It will automatically split when you start and when you die.\n");
