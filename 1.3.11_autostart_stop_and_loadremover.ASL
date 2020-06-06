@@ -22,9 +22,11 @@ startup
 settings.Add("1.3.11", true, "1.3.11");
 settings.SetToolTip("1.3.11", "It will automatically split when you:\n - Spawn\n - Beat the game\nCurrently supports the following versions:\n - 1.3.11");
 
-settings.Add("notb2", true, "All Endings", "1.3.11");
+settings.Add("notb2", false, "All Endings", "1.3.11");
 settings.SetToolTip("notb2", "Select this if you are going for any ending.\nIf you are going for B2, time ends when the B1 run would end, but you need to add 1:22.12 to your final time.");
 
+settings.Add("death%", false, "Death%", "1.3.11");
+settings.SetToolTip("death%", "It will automatically split when you start and when you die.\n");
 }
 
 init
@@ -49,18 +51,22 @@ split
 {
 	if (settings["1.3.11"] == true)
 	{
-        if (settings["notb2"] == true && settings["b2"] == false)
+        if (settings["notb2"] == true)
+		{
             if ((current.sprint == -5 && current.scp106state != -11) || (current.a2event == 1) || (current.yaxis < 42.0781 && current.yaxis > 42 && current.deathTimer == 0))
             {
                 vars.split++;
                 return true;
             }
-        else if (settings["notb2"] == false && settings["b2"] == true)
-            if (current.deathTimer != 0.0 && current.yaxis < 42.0781)
-            {
-                vars.split++;
-                return true;
-            }
+		}
+		else if (settings["death%"] == true)
+		{
+			if (current.deathTimer != 0.0)
+			{
+				vars.split++;
+				return true;
+			}
+		}
 	}
 }
 

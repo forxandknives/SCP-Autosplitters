@@ -28,6 +28,9 @@ settings.SetToolTip("maincategory", "Select this if you are running Any% with or
 settings.Add("randomending", false, "Random%", "1.3.11");
 settings.SetToolTip("randomending", "Select this if you are running Random%.\nGate B ending 2 ends where the B1 ending would. You need to add 1:22:12 to your final time.");
 
+settings.Add("death%", false, "Death%", "1.3.11");
+settings.SetToolTip("death%", "It will automatically split when you start and when you die.\n");
+
 settings.Add("gatea1ending", false, "Gate A Ending 1", "maincategory");
 settings.SetToolTip("gatea1ending", "It will automatically split when you:\n - Reach Gate A\n - Trigger the Chaos Insurgency event.");
 
@@ -167,6 +170,14 @@ split
 					vars.split = 5;
 					return true;
 				}
+			}
+		}
+		else if (settings["death%"] == true)
+		{
+			if (current.deathTimer != 0.0)
+			{
+				vars.split++;
+				return true;
 			}
 		}
 	}
