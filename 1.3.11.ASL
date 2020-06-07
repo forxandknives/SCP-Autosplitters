@@ -49,7 +49,9 @@ init
     if (modules.First().ModuleMemorySize == 6537216)
         version = "v1.3.11";
 	int split;
+	bool isDead;
 	vars.split = 0;
+	vars.isDead = false;
 }
 
 start
@@ -174,9 +176,10 @@ split
 		}
 		else if (settings["death%"] == true)
 		{
-			if (current.deathTimer != 0.0)
+			if (current.deathTimer != 0.0 && !vars.isDead)
 			{
 				vars.split++;
+				vars.isDead = true;
 				return true;
 			}
 		}
