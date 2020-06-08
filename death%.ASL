@@ -58,9 +58,7 @@ init
     else if (modules.First().ModuleMemorySize == 6123520)
         version = "v1.3.7";
 
-    int split;
     bool isDead;
-    vars.split = 0;
     vars.isDead = false;
 }
 
