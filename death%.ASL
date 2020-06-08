@@ -92,5 +92,6 @@ isLoading
 
 reset
 {
+	vars.isDead = false;
     return (current.mainmenu == 0 && settings["death%"]) ? true : false;
 }

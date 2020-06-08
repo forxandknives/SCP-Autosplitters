@@ -203,6 +203,7 @@ reset
 	{
 		if(current.mainmenu == 0)
 		{
+			vars.isDead = false;
 			vars.split = 0;
 			return true;
 		}
