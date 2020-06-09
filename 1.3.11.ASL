@@ -28,6 +28,9 @@ settings.SetToolTip("maincategory", "Select this if you are running Any% with or
 settings.Add("randomending", false, "Random%", "1.3.11");
 settings.SetToolTip("randomending", "Select this if you are running Random%.\nGate B ending 2 ends where the B1 ending would. You need to add 1:22:12 to your final time.");
 
+settings.Add("spliton079r", false, "Split on SCP-079", "randomending");
+settings.SetToolTip("spliton079r", "Will split when SCP-079 activates.\n");
+
 settings.Add("death%", false, "Death%", "1.3.11");
 settings.SetToolTip("death%", "It will automatically split when you start and when you die.\n");
 
@@ -42,6 +45,9 @@ settings.SetToolTip("gateb1ending", "It will automatically split when you:\n - R
 
 settings.Add("gateb2ending", false, "Gate B Ending 2", "maincategory");
 settings.SetToolTip("gateb2ending", "It will automatically split when you:\n - Reach Gate B\n - Die after triggering the SCP-682 event.");
+
+settings.Add("spliton079m", false, "Split on SCP-079", "maincategory");
+settings.SetToolTip("spliton079m", "Will split when SCP-079 activates.\n");
 }
 
 init
@@ -50,8 +56,10 @@ init
         version = "v1.3.11";
 	int split;
 	bool isDead;
+	bool is079Activated;
 	vars.split = 0;
 	vars.isDead = false;
+	vars.is079Activated = false;
 }
 
 start
@@ -79,6 +87,14 @@ split
 			{
 				vars.split = 3;
 				return true;
+			}
+			else if (settings["spliton079m"] == true)
+			{
+				if (current.yaxis < -2.44 && current.yaxis > -2.46 && vars.split == 3 && vars.is079Activated == false)
+				{
+					vars.is079Activated = true;
+					return true;
+				}
 			}
 			else if(settings["gatea1ending"] == true)
 			{
@@ -157,6 +173,14 @@ split
 				vars.split = 3;
 				return true;
 			}
+			else if (settings["spliton079r"])
+			{
+				if (current.yaxis < -2.44 && current.yaxis > -2.46 && vars.split == 3 && vars.is079Activated == false)
+				{
+					vars.is079Activated = true;
+					return true;
+				}
+			}
 			if (vars.split == 3)
 			{
 				if ((current.xaxis > 141 && current.xaxis < 145 && current.zaxis < 9 && current.zaxis > 6 && current.yaxis > 500) || (current.yaxis > 42 && current.yaxis < 43))
@@ -203,6 +227,7 @@ reset
 	{
 		if(current.mainmenu == 0)
 		{
+			vars.is079Activated = false;
 			vars.isDead = false;
 			vars.split = 0;
 			return true;
