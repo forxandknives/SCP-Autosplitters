@@ -46,7 +46,7 @@ startup
 
 init
 {
-    print(Convert.ToString(modules.First().ModuleMemorySize));
+    //print(Convert.ToString(modules.First().ModuleMemorySize));
     if (modules.First().ModuleMemorySize == 6537216)
         version = "v1.3.11";
     else if (modules.First().ModuleMemorySize == 6500352)
@@ -69,7 +69,7 @@ start
         if (old.blink < -9.99999999 && (current.blink > 1 || current.blink <= -10.00000001) && current.zaxis > 130)
         {
 			return true;
-		}
+	}
     }
 }
 
