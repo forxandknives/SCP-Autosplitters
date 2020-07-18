@@ -44,176 +44,10 @@ split
 {
 	if (settings["100%"] == true)
 	{
-        if(current.totalachievements == 1 && vars.split == 1)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 2 && vars.split == 2)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 3 && vars.split == 3)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 4 && vars.split == 4)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 5 && vars.split == 5)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 6 && vars.split == 6)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 7 && vars.split == 7)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 8 && vars.split == 8)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 9 && vars.split == 9)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 10 && vars.split == 10)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 11 && vars.split == 11)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 12 && vars.split == 12)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 13 && vars.split == 13)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 14 && vars.split == 14)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 15 && vars.split == 15)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 16 && vars.split == 16)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 17 && vars.split == 17)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 18 && vars.split == 18)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 19 && vars.split == 19)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 20 && vars.split == 20)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 21 && vars.split == 21)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 22 && vars.split == 22)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 23 && vars.split == 23)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 24 && vars.split == 24)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 25 && vars.split == 25)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 26 && vars.split == 26)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 27 && vars.split == 27)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 28 && vars.split == 28)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 29 && vars.split == 29)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 30 && vars.split == 30)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 31 && vars.split == 31)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 32 && vars.split == 32)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 33 && vars.split == 33)
-        {
-            vars.split++;
-            return true;
-        }
-        if(current.totalachievements == 34 && vars.split == 34)
-        {
-            vars.split++;
-            return true;
-        }
+        if ((current.totalachievements != old.totalachievements)) {
+			vars.split++;
+			return true;
+		}
         if((current.totalachievements >= 34 && vars.split == 35 && current.sprint == -5) | (current.totalachievements >= 34 && current.a2event == 1) | (current.totalachievements >= 34 && current.yaxis < 42.0781 && current.yaxis > 42))
         {
             vars.split++;
@@ -226,9 +60,9 @@ isLoading
 {
 	if (settings["1.3.9"] == true)
 	{
-		if ((current.onaloadingscreen != 0) | (current.yaxis > 42 && current.yaxis < 44 && current.gateloadingscreen == 50) | (current.yaxis > 48 && current.yaxis < 49 && current.gateloadingscreen == 50) | (current.yaxis > 1 && current.yaxis < 2 && current.gateloadingscreen == 50 && current.loadingscreentext == 0))
+		if ((current.yaxis > 42 && current.yaxis < 44 && current.gateloadingscreen == 50) || (current.yaxis > 48 && current.yaxis < 49 && current.gateloadingscreen == 50) || (current.yaxis > 1 && current.yaxis < 2 && current.gateloadingscreen == 50 && current.loadingscreentext == 0))
 			return true;
-		
+
 			return false;
 	}
 }
