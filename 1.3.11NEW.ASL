@@ -8,20 +8,20 @@
 state("SCP - Containment Breach" , "v1.3.11") {
     bool a2Event : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0x1490; // 1 for event is happening
     bool inventory : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0x5E4; // 1 for user is in inventory
-	bool loading : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0x598; // 1 for user is in a quick load
+    bool loading : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0x598; // 1 for user is in a quick load
     bool paused : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0x5dc; // 1 for user is paused in game
 
     byte mainMenu : "SCP - Containment Breach.exe", 0x000f5400, 0x120, 0x458; // 0 for at main menu
-	byte gateBisLoading1 : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0xd68; // 2 for in load from ez to gate b surface
-	byte gateBisLoading2 : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0xd64; // 2 for in load from ez to gate b surface
-	byte keypresses : "SCP - Containment Breach.exe", 0x000f5f70, 0x604; // num of kerypress done, goes from 0-32, 0 when in a load
+    byte gateBisLoading1 : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0xd68; // 2 for in load from ez to gate b surface
+    byte gateBisLoading2 : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0xd64; // 2 for in load from ez to gate b surface
+    byte keypresses : "SCP - Containment Breach.exe", 0x000f5f70, 0x604; // num of kerypress done, goes from 0-32, 0 when in a load
 
-	float blink : "SCP - Containment Breach.exe", 0x000f5400, 0x498, 0x7CC; // shows how much blink is left
+    float blink : "SCP - Containment Breach.exe", 0x000f5400, 0x498, 0x7CC; // shows how much blink is left
     float deathTimer : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0x358; // says if dead or not
-	float sprint : "SCP - Containment Breach.exe", 0x000f5400, 0x680, 0x77C; // how much sprint you have
-	float xaxis : "SCP - Containment Breach.exe", 0x000f5400, 0x160, 0x140, 0x40; // player x pos
-	float yaxis : "SCP - Containment Breach.exe", 0x000f5400, 0x160, 0x140, 0x44; // player y pos
-	float zaxis : "SCP - Containment Breach.exe", 0x000f5400, 0x160, 0x140, 0x48; // player z pos
+    float sprint : "SCP - Containment Breach.exe", 0x000f5400, 0x680, 0x77C; // how much sprint you have
+    float xaxis : "SCP - Containment Breach.exe", 0x000f5400, 0x160, 0x140, 0x40; // player x pos
+    float yaxis : "SCP - Containment Breach.exe", 0x000f5400, 0x160, 0x140, 0x44; // player y pos
+    float zaxis : "SCP - Containment Breach.exe", 0x000f5400, 0x160, 0x140, 0x48; // player z pos
 }
 
 startup {
@@ -48,9 +48,11 @@ init {
     int moduleSize = modules.First().ModuleMemorySize;
     //verifies that you are on v1.3.11
     if (moduleSize == 6537216) version = "1.3.11";
+    
     //keeps track of current split
     int currentSplit;
     vars.currentSplit = 0;
+    
     //keeps track of whats needed to trigger autostop on Gate B ending
     bool gateBEnding;
     vars.gateBEnding = current.yaxis < 42.0781 && current.yaxis > 42f && current.deathTimer == 0 ? true : false;
