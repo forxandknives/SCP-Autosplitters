@@ -60,7 +60,7 @@ isLoading
 {
 	if (settings["1.3.9"] == true)
 	{
-		if ((current.yaxis > 42 && current.yaxis < 44 && current.gateloadingscreen == 50) || (current.yaxis > 48 && current.yaxis < 49 && current.gateloadingscreen == 50) || (current.yaxis > 1 && current.yaxis < 2 && current.gateloadingscreen == 50 && current.loadingscreentext == 0))
+		if ((current.onaloadingscreen != 0) || (current.yaxis > 42 && current.yaxis < 44 && current.gateloadingscreen == 50) || (current.yaxis > 48 && current.yaxis < 49 && current.gateloadingscreen == 50) || (current.yaxis > 1 && current.yaxis < 2 && current.gateloadingscreen == 50 && current.loadingscreentext == 0))
 			return true;
 
 			return false;
