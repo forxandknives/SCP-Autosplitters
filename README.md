@@ -12,7 +12,7 @@ HOW TO USE AUTOSPLITTER:
 
 1.3.11NEW.ASL: Must have 5 splits in your livesplit. Splits when you start, enter heavy containment, enter entrance zone, encounter SCP-079, reach the surface, and beat the game. The timer for B2 stops where it would stop for B1, manually add 1:22.12 to your final time.
 
-1.3.11.ASL: Is outdated DO NOT USE.
+1.3.11.ASL: THSI IS OUTDATED DO NOT USE.
 
 1.3.9100%.ASl: Will split after each achievement you get. Have 35 splits in your livesplit.Load remover included set livesplit to compare against game time.
 
