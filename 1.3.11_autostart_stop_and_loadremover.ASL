@@ -19,10 +19,20 @@ state("SCP - Containment Breach", "v1.3.11")
 
 startup
 {
+	//prompts use to switch to game time if they are using real time
+	if (timer.CurrentTimingMethod == TimingMethod.RealTime) {
+	    var gameTimeMessage = MessageBox.Show( // i yoinked part of this code from the BFBBR .ASL file
+	            "SCP - Containment Breach v1.3.11 uses Time Without Loads (Game Time) as it's main timing method.\n\n" +
+	            "Your timing method is currently set to Real Time. \nWould you like to switch to Game Time?\n",
+	            "Livesplit | SCP - Containment Breach v1.3.11",
+	            MessageBoxButtons.YesNo, MessageBoxIcon.Question
+	    );
+	    if (gameTimeMessage == DialogResult.Yes) timer.CurrentTimingMethod = TimingMethod.GameTime;
+	}
 settings.Add("1.3.11", true, "1.3.11");
 settings.SetToolTip("1.3.11", "It will automatically split when you:\n - Spawn\n - Beat the game\nCurrently supports the following versions:\n - 1.3.11");
 
-settings.Add("allEndings", false, "All Endings", "1.3.11");
+settings.Add("allEndings", true, "All Endings", "1.3.11");
 settings.SetToolTip("allEndings", "Select this if you are going for any ending.\nIf you are going for B2, time ends when the B1 run would end, but you need to add 1:22.12 to your final time.");
 
 settings.Add("death%", false, "Death%", "1.3.11");
