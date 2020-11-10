@@ -90,7 +90,7 @@ split {
         return true;
     }
     //split when scp079 is activated
-    if (vars.currentSplit == 3 && current.achievements != old.achievements) {
+    if (vars.currentSplit == 3 && current.achievements != old.achievements && current.yaxis < -2.44 && current.yaxis > -2.46) {
         vars.currentSplit++;
         return true;
     }
