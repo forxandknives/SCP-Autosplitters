@@ -43,6 +43,11 @@ startup {
                                             "\n - Encounter SCP-079.\n - Reach the Surface." +
                                             "\n - Finish the Game Through Any Ending." +
                                             "\nCurrently supports the following versions:\n - 1.3.11");
+    settings.Add("SCP079", false, "Split on SCP-079");
+    settings.SetToolTip("SCP079", "Setting to split when SCP-079 is activated.\n" +
+                        "If another SCP's room overlaps with 079's room\n" +
+                        "It may not split. It's best to not use this setting\n" +
+                        "during Random% runs.");
 }
 
 init {
@@ -86,11 +91,16 @@ split {
     }
     //split when enter entrance zone
     if (vars.currentSplit == 2 && current.zaxis < 48f && current.zaxis > 47f) {
-        vars.currentSplit++;
+        if (settings["SCP079"]) {
+            vars.currentSplit++;
+        } else {
+            vars.currentSplit += 2;
+        }
         return true;
     }
     //split when scp079 is activated
-    if (vars.currentSplit == 3 && current.achievements != old.achievements && current.yaxis < -2.44 && current.yaxis > -2.46) {
+    if (settings["SCP079"] && vars.currentSplit == 3 && current.achievements != old.achievements &&
+        current.yaxis < -2.44 && current.yaxis > -2.46) {
         vars.currentSplit++;
         return true;
     }
