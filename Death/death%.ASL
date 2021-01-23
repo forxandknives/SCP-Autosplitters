@@ -41,7 +41,9 @@ state("SCP - Containment Breach", "v1.3.7")
 startup
 {
     settings.Add("death%", true, "Death%");
-    settings.SetToolTip("death%", "Will automatically start the timer and stop when you die.\nCurrently works on versions:\n-1.3.11\n-1.3.10\n-1.3.9\n-1.3.8\n-1.3.7\n");
+    settings.SetToolTip("death%", "Will automatically start the timer and stop"+
+                       "when you die.\nCurrently works on versions:\n1.3.11-"+
+                       "1.3.7\n");
 }
 
 init
@@ -66,7 +68,8 @@ start
 {
     if (settings["death%"] == true)
     {
-        if (old.blink < -9.99999999 && (current.blink > 1 || current.blink <= -10.00000001) && current.zaxis > 130)
+        if (old.blink < -9.99999999 && (current.blink > 1 || current.blink 
+            <= -10.00000001) && current.zaxis > 130)
         {
 			return true;
 	}
@@ -85,7 +88,8 @@ split
 
 isLoading
 {
-    //for whatever dumbfuck reason, livesplit refuses to split correctly if this function isnt here
+    //for whatever dumbfuck reason, livesplit refuses to split correctly if 
+    // this function isnt here
     //i dont need the function but fuck you
     return false;
 }
