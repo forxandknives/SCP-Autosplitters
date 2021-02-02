@@ -121,8 +121,8 @@ isLoading {
 }
 //updates values you get from reading the memory into one variable
 update {
-    vars.isLoading = current.loading && current.keypresses == 0 ? true : false;
-    vars.gateLoading = (current.yaxis > 501.25 || (current.yaxis > 42 && current.gateBisLoading1 == 2 && !current.paused && current.gateBisLoading2 == 2 && !current.inventory)) ? true : false;
+    vars.isLoading = current.loading && current.keypresses == 0 && current.blink == old.blink;
+    vars.gateLoading = ((current.yaxis < 502 && current.yaxis > 501.25) || (current.yaxis > 42 && current.gateBisLoading1 == 2 && !current.paused && current.gateBisLoading2 == 2 && !current.inventory)) ? true : false;
     vars.gateBEnding = current.yaxis < 42.0781 && current.yaxis > 42f && current.deathTimer == 0 ? true : false;
 }
 //resets the run if on main menu and sets current split back to 0
