@@ -1,20 +1,17 @@
 
 state("SCP - Containment Breach", "1.3.3") {
 
-    bool paused : "SCP - Containment Breach.exe", 0x000EFF78, 0xFC, 0x9A8, 0x248;
-    bool inventory : "SCP - Containment Breach.exe", 0x000EFF78, 0xFC, 0x9A8, 0x250;
-    bool loading : "SCP - Containment Breach.exe", 0x000EFF78, 0xFC, 0x9A8, 0x204;
-    bool a2Event : "SCP - Containment Breach.exe", 0x000EFF78, 0xFC, 0x9A8, 0x182C;
-    bool console : "SCP - Containment Breach.exe", 0x000EFF78, 0xFC, 0x9A8, 0x5B8;
+    bool paused : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x9EC;
+    bool inventory : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x9F4;
+    bool loading : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x9A8;
+    bool a2Event : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x1FD0;
+    bool console : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0xD5C;
 
-    byte mainMenu : "SCP - Containment Breach.exe", 0x000EFF78, 0xFC, 0x9A8, 0x1910;
+    byte mainMenu : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x20B4;
 
-    float blink : "SCP - Containment Breach.exe", 0x000EFF78, 0xFC, 0x9A8, 0x0;
-    float stamina : "SCP - Containment Breach.exe", 0x000EFF78, 0xFC, 0x9A8, 0x14;
-    float xPos : "SCP - Containment Breach.exe", 0x000F67DC, 0xC, 0x4, 0x40;
-    float yPos : "SCP - Containment Breach.exe", 0x000F67DC, 0xC, 0x4, 0x44;
-    float zPos : "SCP - Containment Breach.exe", 0x000F67DC, 0xC, 0x4, 0x48;
-    float deathTimer : "SCP - Containment Breach.exe", 0x000F5EEC, 0xA0, 0x6C, 0x58, 0x1C, 0x74, 0x2D0;
+    float blink : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x7A4;
+    float stamina : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x7B8;
+    float deathTimer : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x780;
 }
 
 startup {
@@ -48,17 +45,17 @@ init {
     bool isLoading;
     vars.isLoading = current.loading && current.blink == old.blink;
 
-    bool gateALoading;
-    vars.gateALoading = (current.yPos > 48 && current.yPos < 49 && current.blink == old.blink);
+    bool gateLoading;
+    vars.gateLoading = current.blink == old.blink && !current.inventory && !current.paused && !current.console;
 
-    bool gateBLoading;
-    vars.gateBLoading = (current.yPos > 42.3 && current.yPos < 42.7 && current.blink == old.blink && !current.inventory && !current.paused && !current.console);
+    bool reachedSurface;
+    vars.reachedSurface = false;
 
 }
 
 start {
     if (settings["allEndings1.3.3"] && version.Equals("1.3.3") && !current.loading) {
-        if (old.blink < -9.99999999 && (current.blink > 1 || current.blink <= -10.00000001) && current.zPos > 130) {
+        if (old.blink < -9.99999999 && (current.blink > 1 || current.blink <= -10.00000001)) {
 			vars.currentSplit = 1;
 			return true;
 		}
@@ -66,31 +63,22 @@ start {
 }
 
 split {
-    if (vars.currentSplit == 1 && current.zPos < 95 && current.zPos > 94) {
-        vars.currentSplit++;
-        return true;
-    }
-    if (vars.currentSplit == 2 && current.zPos < 48 && current.zPos > 47) {
-        vars.currentSplit++;
-        return true;
-    }
-    if (vars.currentSplit == 3 && ((current.yPos < 49 && current.yPos > 48) || (current.yPos > 42.3 && current.yPos < 42.7))) {
-        vars.currentSplit++;
-        return true;
-    }
-    if (vars.currentSplit == 4 && ((current.stamina == -5 || current.a2Event) || (current.yPos < 42.0781))) {
-        return true;
+    if (vars.reachedSurface) {
+        if (current.stamina == -5 || current.a2Event || current.deathTimer != old.deathTimer) {
+            return true;
+        }
     }
 }
 
 isLoading {
-    return vars.isLoading || vars.gateALoading || vars.gateBLoading;
+    if (vars.isLoading) {
+        return true;
+    } 
 }
 
 update {
     vars.isLoading = current.loading && current.blink == old.blink;
-    vars.gateALoading = (current.yPos > 48 && current.yPos < 49 && current.blink == old.blink);
-    vars.gateBLoading = (current.yPos > 42.3 && current.yPos < 42.7 && current.blink == old.blink && !current.inventory && !current.paused && !current.console);
+    vars.gateLoading = current.blink == old.blink && !current.inventory && !current.paused && !current.console;
 }
 
 reset {
