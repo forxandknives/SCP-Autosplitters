@@ -20,7 +20,7 @@ state("SCP - Containment Breach", "1.3.3") {
 startup {
     if (timer.CurrentTimingMethod == TimingMethod.RealTime) {
         var gameTimeMessage = MessageBox.Show( // i yoinked part of this code from the BFBBR .ASL file
-                "SCP - Containment Breach v1.3.11 uses Time Without Loads (Game Time) as it's main timing method.\n\n" +
+                "SCP - Containment Breach v1.3.3 uses Time Without Loads (Game Time) as it's main timing method.\n\n" +
                 "Your timing method is currently set to Real Time. \nWould you like to switch to Game Time?\n",
                 "Livesplit | SCP - Containment Breach v1.3.3",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question
