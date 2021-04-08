@@ -4,10 +4,13 @@ state("SCP - Containment Breach", "1.3.3") {
     bool paused : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x9EC;
     bool inventory : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x9F4;
     bool loading : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x9A8;
+    bool mouseHold : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x9AC;
     bool a2Event : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x1FD0;
     bool console : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0xD5C;
 
     byte mainMenu : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x20B4;
+
+    int inEle : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0xF6A;
 
     float blink : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x7A4;
     float stamina : "SCP - Containment Breach.exe", 0x000F52D0, 0x1A0, 0x7B8;
@@ -43,10 +46,8 @@ init {
     vars.currentSplit = 0;
 
     bool isLoading;
-    vars.isLoading = current.loading && current.blink == old.blink;
 
     bool gateLoading;
-    vars.gateLoading = current.blink == old.blink && !current.inventory && !current.paused && !current.console;
 
     bool reachedSurface;
     vars.reachedSurface = false;
@@ -63,22 +64,20 @@ start {
 }
 
 split {
-    if (vars.reachedSurface) {
-        if (current.stamina == -5 || current.a2Event || current.deathTimer != old.deathTimer) {
-            return true;
-        }
+    if (current.stamina == -5 || current.a2Event || current.deathTimer != old.deathTimer) {
+        return true;
     }
 }
 
 isLoading {
-    if (vars.isLoading) {
-        return true;
-    } 
+    return vars.isLoading || vars.gateLoading;
 }
 
 update {
     vars.isLoading = current.loading && current.blink == old.blink;
-    vars.gateLoading = current.blink == old.blink && !current.inventory && !current.paused && !current.console;
+    vars.gateLoading = current.blink == old.blink && !current.inventory && !current.paused &&
+                        !current.console && !current.mouseHold && current.inEle != 0 &&
+                        current.inEle == old.inEle; //literal garbage holy god
 }
 
 reset {
