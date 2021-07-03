@@ -19,7 +19,7 @@ state("SCP - Containment Breach", "1.3.3") {
 
 startup {
     if (timer.CurrentTimingMethod == TimingMethod.RealTime) {
-        var gameTimeMessage = MessageBox.Show( // i yoinked part of this code from the BFBBR .ASL file
+        var gameTimeMessage = MessageBox.Show( // i yoinked part of this code from the BFBBR.ASL file
                 "SCP - Containment Breach v1.3.3 uses Time Without Loads (Game Time) as it's main timing method.\n\n" +
                 "Your timing method is currently set to Real Time. \nWould you like to switch to Game Time?\n",
                 "Livesplit | SCP - Containment Breach v1.3.3",
@@ -64,12 +64,12 @@ start {
 }
 
 split {
-    if (current.stamina == -5 || current.a2Event || current.deathTimer != old.deathTimer) {
-        return true;
-    }
+    if (vars.reachedSurface && (current.stamina == -5 || current.a2Event)) return true;
+    if (vars.reachedSurface && current.deathTimer != old.deathTimer) return true;
 }
 
 isLoading {
+    if (vars.gateLoading && !vars.reachedSurface) vars.reachedSurface = true;
     return vars.isLoading || vars.gateLoading;
 }
 
@@ -83,6 +83,7 @@ update {
 reset {
     if (current.mainMenu == 0) {
         vars.currentSplit = 0;
+        vars.reachedSurface = false;
         return true;
     }
 }
