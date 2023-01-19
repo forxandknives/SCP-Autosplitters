@@ -10,8 +10,8 @@ state("SCP - Containment Breach" , "v1.3.11") {
     bool inventory : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0x5E4; // 1 for user is in inventory
     bool loading : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0x598; // 1 for user is in a quick load
     bool paused : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0x5dc; // 1 for user is paused in game
+    bool scp079 : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0x400, 0x14; // 1 if you have scp079 achievement
 
-    byte achievements : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0x550; // number of achievements unlocked
     byte mainMenu : "SCP - Containment Breach.exe", 0x000f5400, 0x120, 0x458; // 0 for at main menu
     byte gateBisLoading1 : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0xd68; // 2 for in load from ez to gate b surface
     byte gateBisLoading2 : "SCP - Containment Breach.exe", 0x000f5400, 0x98, 0xd64; // 2 for in load from ez to gate b surface
@@ -44,10 +44,7 @@ startup {
                                             "\n - Finish the Game Through Any Ending." +
                                             "\nCurrently supports the following versions:\n - 1.3.11");
     settings.Add("SCP079", false, "Split on SCP-079");
-    settings.SetToolTip("SCP079", "Setting to split when SCP-079 is activated.\n" +
-                        "If another SCP's room overlaps with 079's room\n" +
-                        "It may not split. It's best to not use this setting\n" +
-                        "during Random% runs.");
+    settings.SetToolTip("SCP079", "Setting to split when SCP-079 is activated.\n");
 }
 
 init {
@@ -99,8 +96,7 @@ split {
         return true;
     }
     //split when scp079 is activated
-    if (settings["SCP079"] && vars.currentSplit == 3 && current.achievements != old.achievements &&
-        current.yaxis < -2.44 && current.yaxis > -2.46) {
+    if (settings["SCP079"] && vars.currentSplit == 3 && current.scp079) {
         vars.currentSplit++;
         return true;
     }
