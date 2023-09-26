@@ -84,7 +84,7 @@ isLoading
 {
 	if (settings["1.3.11"] == true)
 	{
-		if ((current.onaloadingscreen == 1 && current.keypresses == 0) || (current.yaxis > 501.25) || (current.yaxis > 42 && current.gateBloadigscreen == 2 && current.paused == 0 && current.gateBloadigscreen2 == 2 && current.inventory == 0))
+		if ((current.onaloadingscreen == 1 && current.keypresses == 0) || (current.yaxis > 501.25 && current.yaxis < 502) || (current.yaxis > 42 && current.gateBloadigscreen == 2 && current.paused == 0 && current.gateBloadigscreen2 == 2 && current.inventory == 0))
 			return true;
 		else
 			return false;
